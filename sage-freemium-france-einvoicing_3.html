@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sage Freemium · Be ready for e-invoicing in France</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sage:#00dc06;            /* Sage brand spark green */
+    --sage-press:#00b805;
+    --sage-tint:#e6fbe7;
+    --sage-tint-2:#f1fdf2;
+    --ink:#08160f;             /* near-black green */
+    --forest:#0a2e21;          /* deep premium green */
+    --forest-2:#06231a;
+    --slate:#46564e;
+    --slate-2:#7c8a82;
+    --paper:#ffffff;
+    --bg:#f7faf8;
+    --mist:#eef4f0;
+    --line:#e3ece6;
+    --line-strong:#d3e0d8;
+    --radius:20px;
+    --shadow-xs:0 1px 2px rgba(8,22,15,.05);
+    --shadow-sm:0 2px 6px rgba(8,22,15,.06),0 8px 20px rgba(8,22,15,.04);
+    --shadow-md:0 12px 30px rgba(8,22,15,.09),0 4px 10px rgba(8,22,15,.05);
+    --shadow-lg:0 36px 70px rgba(8,22,15,.16),0 10px 24px rgba(8,22,15,.08);
+    --ease:cubic-bezier(.22,.61,.36,1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    color:var(--ink);background:var(--paper);line-height:1.55;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden;font-feature-settings:"cv11","ss01";
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px}
+  a{text-decoration:none;color:inherit}
+  ::selection{background:var(--sage);color:var(--ink)}
+
+  /* ---------- nav ---------- */
+  nav{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.78);backdrop-filter:saturate(160%) blur(16px);border-bottom:1px solid var(--line)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .brand{display:flex;align-items:center;gap:14px}
+  .wordmark{font-size:1.5rem;font-weight:800;letter-spacing:-.04em;color:var(--sage);line-height:1}
+  .brand-sep{width:1px;height:20px;background:var(--line-strong)}
+  .brand-tag{font-size:.78rem;font-weight:600;color:var(--slate);letter-spacing:.01em}
+  .nav-links{display:flex;gap:32px;align-items:center;font-size:.9rem;font-weight:500;color:var(--slate)}
+  .nav-links a{transition:color .2s}
+  .nav-links a:hover{color:var(--ink)}
+  .nav-cta{background:var(--ink);color:#fff;padding:11px 22px;border-radius:999px;font-weight:600;font-size:.88rem;transition:transform .2s var(--ease),box-shadow .2s}
+  .nav-cta:hover{transform:translateY(-1px);box-shadow:var(--shadow-md)}
+  @media(max-width:880px){.nav-links{display:none}.brand-sep,.brand-tag{display:none}}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;overflow:hidden;background:var(--bg);padding:92px 0 110px}
+  .hero::before{content:"";position:absolute;inset:0;background:
+      radial-gradient(900px 480px at 88% -10%,rgba(0,220,6,.13),transparent 58%),
+      radial-gradient(760px 480px at -8% 12%,rgba(10,46,33,.05),transparent 55%);pointer-events:none}
+  .hero::after{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(8,22,15,.04) 1px,transparent 1px);background-size:26px 26px;
+      -webkit-mask-image:linear-gradient(180deg,#000,transparent 72%);mask-image:linear-gradient(180deg,#000,transparent 72%);pointer-events:none}
+  .hero-inner{position:relative;display:grid;grid-template-columns:1.04fr .96fr;gap:56px;align-items:center}
+  .hero-copy{max-width:620px}
+  @media(max-width:920px){.hero-inner{grid-template-columns:1fr;gap:46px}.hero-copy{max-width:640px}}
+  .hero-visual{position:relative;opacity:0;animation:rise .85s var(--ease) .28s forwards}
+  .hero-visual::after{content:"";position:absolute;right:-24px;top:-24px;width:62%;height:66%;background:radial-gradient(circle,rgba(0,220,6,.22),transparent 70%);filter:blur(8px);z-index:-1}
+  .hero-img{width:100%;height:auto;display:block;border-radius:22px;box-shadow:var(--shadow-lg);border:1px solid rgba(255,255,255,.6)}
+  .hero-chip{position:absolute;left:18px;bottom:18px;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:14px;
+      padding:12px 16px;box-shadow:var(--shadow-md);display:flex;align-items:center;gap:12px;font-size:.88rem;font-weight:700;color:var(--ink)}
+  .hero-chip .ic{width:32px;height:32px;border-radius:9px;background:var(--sage-tint);display:grid;place-items:center;flex:none}
+  .hero-chip .ic svg{width:16px;height:16px;stroke:var(--sage-press);stroke-width:3;fill:none}
+  .hero-chip small{display:block;font-weight:500;color:var(--slate-2);font-size:.74rem;letter-spacing:.01em}
+  .eyebrow{display:inline-flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);padding:9px 16px;border-radius:999px;
+      font-size:.8rem;font-weight:600;color:var(--forest);box-shadow:var(--shadow-xs);margin-bottom:30px;opacity:0;animation:rise .7s var(--ease) forwards}
+  .live-dot{width:8px;height:8px;border-radius:50%;background:var(--sage);box-shadow:0 0 0 4px rgba(0,220,6,.18);animation:pulse 2.6s infinite}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 4px rgba(0,220,6,.18)}50%{box-shadow:0 0 0 7px rgba(0,220,6,.04)}}
+  h1{font-size:clamp(2.7rem,5.8vw,4.4rem);line-height:1.02;letter-spacing:-.04em;font-weight:800;margin-bottom:24px;opacity:0;animation:rise .7s var(--ease) .08s forwards}
+  h1 .hl{position:relative;white-space:nowrap}
+  h1 .hl::after{content:"";position:absolute;left:-3px;right:-3px;bottom:.08em;height:.32em;background:var(--sage);opacity:.34;border-radius:3px;z-index:-1}
+  .sub{font-size:1.22rem;color:var(--slate);max-width:640px;margin-bottom:38px;opacity:0;animation:rise .7s var(--ease) .16s forwards}
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;opacity:0;animation:rise .7s var(--ease) .24s forwards}
+  .btn{display:inline-flex;align-items:center;gap:9px;padding:16px 28px;border-radius:999px;font-weight:600;font-size:1rem;
+      transition:transform .2s var(--ease),box-shadow .2s,background .2s;cursor:pointer;border:none;font-family:inherit}
+  .btn-primary{background:var(--sage);color:var(--ink)}
+  .btn-primary:hover{background:var(--sage-press);transform:translateY(-2px);box-shadow:0 14px 32px rgba(0,184,5,.34)}
+  .btn-ghost{background:#fff;color:var(--ink);border:1px solid var(--line-strong);box-shadow:var(--shadow-xs)}
+  .btn-ghost:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}
+  .arrow{transition:transform .2s var(--ease)}
+  .btn:hover .arrow{transform:translateX(3px)}
+  .hero-meta{display:flex;gap:28px;flex-wrap:wrap;margin-top:42px;font-size:.9rem;color:var(--slate);font-weight:500;opacity:0;animation:rise .7s var(--ease) .32s forwards}
+  .hero-meta span{display:inline-flex;align-items:center;gap:9px}
+  .tick{width:19px;height:19px;border-radius:50%;background:var(--sage-tint);display:grid;place-items:center;flex:none}
+  .tick svg{width:11px;height:11px;stroke:var(--sage-press);stroke-width:3.2;fill:none}
+  @keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+
+  /* ---------- campaign banner ---------- */
+  .campaign{margin:-52px auto 0;position:relative;z-index:10;background:linear-gradient(135deg,var(--forest),var(--forest-2));color:#fff;
+      border-radius:var(--radius);padding:34px 40px;box-shadow:var(--shadow-lg);display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap;overflow:hidden}
+  .campaign::after{content:"";position:absolute;right:-50px;top:-70px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(0,220,6,.28),transparent 70%)}
+  .campaign-tag{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--sage);margin-bottom:8px}
+  .campaign h2{font-size:1.7rem;font-weight:800;letter-spacing:-.025em;line-height:1.15}
+  .campaign p{color:rgba(255,255,255,.74);font-size:.98rem;margin-top:8px;max-width:560px}
+  .campaign-cost{text-align:right;position:relative;z-index:1}
+  .campaign-cost .big{font-size:2.9rem;font-weight:900;letter-spacing:-.04em;line-height:1}
+  .campaign-cost .lbl{font-size:.82rem;color:rgba(255,255,255,.68);font-weight:500;margin-top:2px}
+
+  /* ---------- sections ---------- */
+  .section-head{text-align:center;max-width:700px;margin:0 auto 56px}
+  .kicker{font-size:.76rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--sage-press);margin-bottom:16px}
+  .section-head h2{font-size:clamp(2.05rem,3.7vw,2.85rem);letter-spacing:-.035em;font-weight:800;line-height:1.07;margin-bottom:18px}
+  .section-head p{font-size:1.12rem;color:var(--slate)}
+
+  .options{padding:96px 0 34px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:stretch}
+  @media(max-width:860px){.grid{grid-template-columns:1fr}}
+
+  .card{position:relative;background:#fff;border:1px solid var(--line);border-radius:24px;padding:40px 36px;display:flex;flex-direction:column;
+      transition:transform .35s var(--ease),box-shadow .35s,border-color .35s;overflow:hidden}
+  .card:hover{transform:translateY(-7px);box-shadow:var(--shadow-lg)}
+  .opt-num{position:absolute;top:30px;right:34px;font-size:3.6rem;font-weight:900;letter-spacing:-.05em;line-height:1;z-index:0}
+  .card-content{position:relative;z-index:1;display:flex;flex-direction:column;height:100%}
+  .opt-label{font-size:.74rem;letter-spacing:.13em;text-transform:uppercase;font-weight:700;margin-bottom:16px}
+  .opt-name{font-size:1.65rem;font-weight:800;letter-spacing:-.025em;margin-bottom:8px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .avail{font-size:.64rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 9px;border-radius:6px;background:var(--mist);color:var(--slate)}
+  .opt-tag{font-size:1.22rem;font-weight:700;margin-bottom:18px;letter-spacing:-.01em}
+  .opt-desc{color:var(--slate);font-size:.99rem;margin-bottom:22px}
+  .spec{display:flex;align-items:baseline;gap:10px;padding:14px 18px;border-radius:13px;margin-bottom:24px}
+  .spec .num{font-size:1.45rem;font-weight:900;letter-spacing:-.03em}
+  .spec .txt{font-size:.86rem;font-weight:500}
+  .feat{list-style:none;display:flex;flex-direction:column;gap:14px;margin-bottom:30px}
+  .feat li{display:flex;gap:13px;align-items:flex-start;font-size:.95rem;line-height:1.45}
+  .feat .fi{width:22px;height:22px;border-radius:7px;flex:none;display:grid;place-items:center;margin-top:1px}
+  .feat .fi svg{width:12px;height:12px;stroke-width:3.2;fill:none}
+  .feat .muted{color:var(--slate-2)}
+  .feat .muted .fi{background:var(--mist)}
+  .feat .muted .fi svg{stroke:var(--slate-2);stroke-width:3}
+  .card-foot{margin-top:auto}
+  .card-btn{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;padding:16px;border-radius:13px;font-weight:700;font-size:1rem;
+      cursor:pointer;border:none;font-family:inherit;transition:transform .2s var(--ease),box-shadow .2s,background .2s}
+  .micro{text-align:center;font-size:.83rem;color:var(--slate-2);margin-top:14px}
+
+  /* option 1 */
+  .card-1 .opt-num{color:var(--mist)}
+  .card-1 .opt-label{color:var(--forest)}
+  .card-1 .opt-name,.card-1 .opt-tag{color:var(--ink)}
+  .card-1 .spec{background:var(--mist)}
+  .card-1 .spec .num,.card-1 .spec .txt{color:var(--forest)}
+  .card-1 .fi{background:#eaf2ed}
+  .card-1 .fi svg{stroke:var(--forest)}
+  .card-1 .card-btn{background:var(--ink);color:#fff}
+  .card-1 .card-btn:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}
+
+  /* option 2 - featured */
+  .card-2{border:1.5px solid rgba(0,220,6,.45);background:linear-gradient(180deg,#fff 60%,var(--sage-tint-2));box-shadow:0 20px 48px rgba(0,184,5,.12)}
+  .card-2 .opt-num{color:#d7f7d9}
+  .card-2 .opt-label{color:var(--sage-press)}
+  .card-2 .opt-name,.card-2 .opt-tag{color:var(--ink)}
+  .card-2 .spec{background:var(--sage-tint)}
+  .card-2 .spec .num,.card-2 .spec .txt{color:var(--sage-press)}
+  .card-2 .fi{background:var(--sage-tint)}
+  .card-2 .fi svg{stroke:var(--sage-press)}
+  .card-2 .card-btn{background:var(--sage);color:var(--ink)}
+  .card-2 .card-btn:hover{background:var(--sage-press);transform:translateY(-2px);box-shadow:0 14px 32px rgba(0,184,5,.34)}
+  .ribbon{position:absolute;top:22px;right:-48px;transform:rotate(45deg);background:var(--sage);color:var(--ink);font-size:.68rem;font-weight:800;
+      letter-spacing:.08em;text-transform:uppercase;padding:7px 58px;z-index:2;box-shadow:var(--shadow-xs)}
+  .compliant-pill{display:inline-flex;align-items:center;gap:8px;font-size:.82rem;font-weight:600;color:var(--sage-press);background:var(--sage-tint);
+      padding:7px 13px;border-radius:9px;margin-bottom:22px}
+
+  /* ---------- door / destination strip ---------- */
+  .narrative{padding:40px 0 86px}
+  .narrative-card{display:grid;grid-template-columns:1fr auto 1fr;gap:0;align-items:center;background:var(--ink);border-radius:var(--radius);
+      padding:42px 48px;color:#fff;position:relative;overflow:hidden}
+  .narrative-card::before{content:"";position:absolute;inset:0;background:radial-gradient(600px 300px at 50% 120%,rgba(0,220,6,.15),transparent 60%)}
+  .nd{position:relative;z-index:1}
+  .nd h3{font-size:1.15rem;font-weight:800;letter-spacing:-.02em;margin-bottom:6px}
+  .nd .lab{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--sage);margin-bottom:10px}
+  .nd p{font-size:.92rem;color:rgba(255,255,255,.66);max-width:300px}
+  .nd.right{text-align:right;margin-left:auto}
+  .nd.right p{margin-left:auto}
+  .narrative-mid{position:relative;z-index:1;padding:0 38px;font-size:1.5rem;color:rgba(255,255,255,.4)}
+  @media(max-width:760px){.narrative-card{grid-template-columns:1fr;gap:28px;text-align:center}.nd.right,.nd.right p{text-align:center;margin:0 auto}.narrative-mid{transform:rotate(90deg);padding:0}}
+
+  /* ---------- comparison ---------- */
+  .compare{padding:80px 0}
+  .ctable{background:#fff;border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:var(--shadow-sm)}
+  .ctable table{width:100%;border-collapse:collapse}
+  .ctable th,.ctable td{padding:17px 24px;text-align:left;border-bottom:1px solid var(--line);font-size:.94rem}
+  .ctable thead th{background:var(--bg);font-weight:700;font-size:.8rem;letter-spacing:.03em;color:var(--slate)}
+  .ctable thead th:nth-child(2),.ctable thead th:nth-child(3){text-align:center}
+  .ctable td:nth-child(2),.ctable td:nth-child(3){text-align:center;width:23%}
+  .ctable tbody tr:last-child td{border-bottom:none}
+  .ctable td:first-child{font-weight:500;color:var(--ink)}
+  .col-2{background:rgba(0,220,6,.045)}
+  .yes{color:var(--sage-press);font-weight:800;font-size:1.05rem}
+  .no{color:var(--slate-2);font-size:1.1rem}
+  .pill-val{font-weight:800;color:var(--ink)}
+  .chead{font-weight:800;letter-spacing:-.01em;font-size:1.02rem;text-transform:none;color:var(--ink)}
+  .chead small{display:block;font-weight:600;font-size:.7rem;color:var(--slate-2);text-transform:uppercase;letter-spacing:.06em;margin-top:4px}
+
+  /* ---------- mandate ---------- */
+  .mandate{background:var(--ink);color:#fff;padding:92px 0;position:relative;overflow:hidden}
+  .mandate::before{content:"";position:absolute;inset:0;background:radial-gradient(820px 420px at 85% 8%,rgba(0,220,6,.15),transparent 60%)}
+  .mandate .wrap{position:relative}
+  .mandate .kicker{color:var(--sage)}
+  .mandate h2{color:#fff;font-size:clamp(1.9rem,3.5vw,2.6rem);letter-spacing:-.035em;font-weight:800;margin-bottom:16px;max-width:700px}
+  .mandate .lead{color:rgba(255,255,255,.72);font-size:1.1rem;max-width:640px;margin-bottom:52px}
+  .timeline{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  @media(max-width:780px){.timeline{grid-template-columns:1fr}}
+  .tnode{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.11);border-radius:18px;padding:28px 26px;position:relative;transition:border-color .3s,transform .3s var(--ease)}
+  .tnode:hover{transform:translateY(-4px)}
+  .tnode.live{border-color:rgba(0,220,6,.5);background:rgba(0,220,6,.07)}
+  .tdate{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--sage);margin-bottom:14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .tnode h3{font-size:1.14rem;font-weight:700;margin-bottom:9px;letter-spacing:-.01em}
+  .tnode p{color:rgba(255,255,255,.64);font-size:.92rem}
+  .badge-all{font-size:.6rem;background:var(--sage);color:var(--ink);padding:3px 9px;border-radius:999px;letter-spacing:.05em;font-weight:800}
+  .mandate-note{color:rgba(255,255,255,.46);font-size:.82rem;margin-top:28px}
+
+  /* ---------- trust ---------- */
+  .trust{padding:84px 0}
+  .trust-card{display:grid;grid-template-columns:1.15fr .85fr;border:1px solid var(--line);border-radius:24px;overflow:hidden;box-shadow:var(--shadow-md)}
+  @media(max-width:860px){.trust-card{grid-template-columns:1fr}}
+  .trust-text{padding:52px 48px}
+  .trust-text h2{font-size:1.9rem;letter-spacing:-.025em;font-weight:800;margin-bottom:16px;line-height:1.13}
+  .trust-text p{color:var(--slate);font-size:1.02rem;margin-bottom:18px}
+  .trust-points{list-style:none;display:flex;flex-direction:column;gap:13px;margin-top:6px}
+  .trust-points li{display:flex;gap:12px;align-items:flex-start;font-size:.96rem}
+  .trust-points .fi{width:22px;height:22px;border-radius:7px;background:var(--sage-tint);display:grid;place-items:center;flex:none;margin-top:1px}
+  .trust-points .fi svg{width:12px;height:12px;stroke:var(--sage-press);stroke-width:3.2;fill:none}
+  .trust-visual{background:linear-gradient(135deg,var(--forest),var(--forest-2));position:relative;overflow:hidden;display:grid;place-items:center;padding:44px}
+  .trust-visual::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.04) 1px,transparent 1px);background-size:22px 22px}
+  .cert{position:relative;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);border-radius:18px;padding:32px 28px;text-align:center;color:#fff;max-width:264px;backdrop-filter:blur(4px)}
+  .seal{width:68px;height:68px;border-radius:50%;margin:0 auto 18px;background:conic-gradient(from 0deg,var(--sage),#8af58e,var(--sage));display:grid;place-items:center;box-shadow:0 0 0 7px rgba(0,220,6,.16)}
+  .seal svg{width:32px;height:32px;stroke:var(--ink);stroke-width:2.6;fill:none}
+  .cert strong{display:block;font-size:1.06rem;margin-bottom:7px}
+  .cert span{font-size:.84rem;color:rgba(255,255,255,.64)}
+
+  /* ---------- faq ---------- */
+  .faq{padding:34px 0 96px;max-width:820px;margin:0 auto}
+  .faq-item{border-bottom:1px solid var(--line)}
+  .faq-q{width:100%;background:none;border:none;cursor:pointer;text-align:left;padding:25px 4px;font-size:1.08rem;font-weight:600;color:var(--ink);
+      display:flex;justify-content:space-between;align-items:center;gap:18px;font-family:inherit}
+  .faq-q .pm{flex:none;width:27px;height:27px;border-radius:50%;background:var(--mist);display:grid;place-items:center;transition:transform .3s var(--ease),background .3s}
+  .faq-q .pm svg{width:13px;height:13px;stroke:var(--ink);stroke-width:2.8;fill:none}
+  .faq-item.open .pm{background:var(--sage);transform:rotate(45deg)}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .38s var(--ease);color:var(--slate);font-size:.98rem}
+  .faq-a div{padding:0 4px 26px}
+  .faq-item.open .faq-a{max-height:280px}
+
+  /* ---------- final ---------- */
+  .final{margin:0 auto 96px;background:linear-gradient(135deg,var(--sage),#3aef40);border-radius:30px;padding:66px 40px;text-align:center;position:relative;overflow:hidden;box-shadow:0 34px 64px rgba(0,184,5,.24)}
+  .final::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(8,22,15,.06) 1px,transparent 1px);background-size:22px 22px}
+  .final-inner{position:relative}
+  .final h2{font-size:clamp(2rem,3.7vw,2.8rem);letter-spacing:-.035em;font-weight:900;color:var(--ink);margin-bottom:15px}
+  .final p{color:rgba(8,22,15,.72);font-size:1.12rem;max-width:540px;margin:0 auto 32px;font-weight:500}
+  .final .btn{background:var(--ink);color:#fff;font-size:1.05rem;padding:17px 34px}
+  .final .btn:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+
+  /* ---------- footer ---------- */
+  footer{border-top:1px solid var(--line);padding:44px 0;color:var(--slate-2);font-size:.85rem}
+  .foot-inner{display:flex;justify-content:space-between;align-items:center;gap:22px;flex-wrap:wrap}
+  .foot-brand{display:flex;align-items:center;gap:12px}
+  .foot-brand .wordmark{font-size:1.2rem}
+  .foot-legal{max-width:540px;text-align:right;line-height:1.5}
+  @media(max-width:680px){.foot-legal{text-align:left}}
+
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .75s var(--ease),transform .75s var(--ease)}
+  .reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-inner">
+    <div class="brand">
+      <span class="wordmark">Sage</span>
+      <span class="brand-sep"></span>
+      <span class="brand-tag">France · Facturation électronique</span>
+    </div>
+    <div class="nav-links">
+      <a href="#options">The offer</a>
+      <a href="#compare">Compare</a>
+      <a href="#mandate">The mandate</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <a href="#options" class="nav-cta">Start free</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap hero-inner">
+    <div class="hero-copy">
+      <span class="eyebrow"><span class="live-dot"></span> France e-invoicing reform · Reception mandatory September 2026</span>
+      <h1>One mandate.<br>Two free ways to <span class="hl">be ready.</span></h1>
+      <p class="sub">From September 2026, every business in France must be able to receive electronic invoices through a certified platform. With Sage Freemium you get there for free - choose to stay exactly as you are, or modernise the way you work.</p>
+      <div class="hero-ctas">
+        <a href="#options" class="btn btn-primary">See your two options <span class="arrow">&rarr;</span></a>
+        <a href="#mandate" class="btn btn-ghost">What changes in 2026</a>
+      </div>
+      <div class="hero-meta">
+        <span><span class="tick"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></span> Certified Plateforme Agréée</span>
+        <span><span class="tick"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></span> Start at &euro;0</span>
+        <span><span class="tick"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></span> No card required</span>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <img class="hero-img" src="sage-hero.jpg" alt="A business owner and their accountant reviewing e-invoicing options together on a laptop">
+      <div class="hero-chip">
+        <span class="ic"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></span>
+        Certified &amp; ready<small>Compliant before September 2026</small>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- CAMPAIGN BANNER -->
+<div class="wrap">
+  <div class="campaign">
+    <div>
+      <div class="campaign-tag">One campaign</div>
+      <h2>Sage Freemium</h2>
+      <p>A single free entry point to the e-invoicing reform, opening into two options. Be compliant without changing a thing, or be compliant and modernise. Your business, your pace.</p>
+    </div>
+    <div class="campaign-cost">
+      <div class="big">&euro;0</div>
+      <div class="lbl">to get started</div>
+    </div>
+  </div>
+</div>
+
+<!-- OPTIONS -->
+<section class="options" id="options">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="kicker">Choose your starting point</div>
+      <h2>Two options. One simple decision.</h2>
+      <p>Both are free and both make you compliant on Sage's certified platform. The only question is whether you carry on exactly as you are - or use the moment to modernise.</p>
+    </div>
+
+    <div class="grid">
+
+      <!-- OPTION 1 -->
+      <div class="card card-1 reveal">
+        <div class="opt-num">01</div>
+        <div class="card-content">
+          <div class="opt-label">Option 1 &middot; Sage Freemium</div>
+          <div class="opt-name">Sage Accès PA <span class="avail">Available June 2026</span></div>
+          <div class="opt-tag">Be e-invoicing compliant.</div>
+          <p class="opt-desc">Stay exactly as you are. Sage Accès PA is a certified platform that makes you compliant without touching the tools you already use - no software upgrade, no connector, no IT project. Plug in and keep working the way you always have.</p>
+          <div class="spec"><span class="num">25</span><span class="txt">invoices / month, free<br>through December 2026</span></div>
+          <ul class="feat">
+            <li><span class="fi"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></span> Your invoicing routine stays untouched - nothing to relearn</li>
+            <li><span class="fi"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></span> No software upgrade, no connector, no dependency</li>
+            <li><span class="fi"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></span> Receive your supplier e-invoices through Sage's certified PA</li>
+            <li><span class="fi"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></span> Convert and send your sales invoices in compliant format</li>
+            <li><span class="fi"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></span> Self-onboard in minutes, plus 10-year legal archiving</li>
+          </ul>
+          <div class="card-foot">
+            <button class="card-btn">Stay compliant, free <span class="arrow">&rarr;</span></button>
+            <p class="micro">For businesses that want to comply without changing a thing.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- OPTION 2 -->
+      <div class="card card-2 reveal">
+        <div class="ribbon">Do more</div>
+        <div class="opt-num">02</div>
+        <div class="card-content">
+          <div class="opt-label">Option 2 &middot; Sage Freemium</div>
+          <div class="opt-name">Sage Active</div>
+          <div class="opt-tag">Modernise your workflow.</div>
+          <p class="opt-desc">Use the deadline to move forward. Sage Active is a modern, cloud-native platform that keeps you fully compliant and brings invoicing, cash flow, banking and AI into one place - so you don't just comply, you upgrade the way you run the business.</p>
+          <div class="compliant-pill">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2"><polyline points="4 12 10 18 20 6"/></svg>
+            Fully compliant too - plus everything below
+          </div>
+          <div class="spec"><span class="num">5</span><span class="txt">invoices / month, free<br>1 user, no card needed</span></div>
+          <ul class="feat">
+            <li><span class="fi"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></span> Create, send and track quotes and invoices in-app</li>
+            <li><span class="fi"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></span> Real-time cash flow, payment chasing and payment links</li>
+            <li><span class="fi"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></span> Bank feeds, reconciliation and bookkeeping as you grow</li>
+            <li><span class="fi"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></span> Built-in AI, ready to unlock as your needs scale</li>
+            <li><span class="fi"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></span> Work live with your accountant in one shared place</li>
+          </ul>
+          <div class="card-foot">
+            <button class="card-btn">Modernise free <span class="arrow">&rarr;</span></button>
+            <p class="micro">For businesses ready to do more than comply.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- DOOR / DESTINATION -->
+<section class="narrative">
+  <div class="wrap">
+    <div class="narrative-card reveal">
+      <div class="nd">
+        <div class="lab">Accès PA</div>
+        <h3>The door</h3>
+        <p>Step through and be compliant today, with the setup you already know.</p>
+      </div>
+      <div class="narrative-mid">&rarr;</div>
+      <div class="nd right">
+        <div class="lab">Active</div>
+        <h3>The destination</h3>
+        <p>When you're ready to modernise, a complete platform is waiting.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON -->
+<section class="compare" id="compare">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="kicker">Side by side</div>
+      <h2>What each option gives you</h2>
+    </div>
+    <div class="ctable reveal">
+      <table>
+        <thead>
+          <tr>
+            <th>&nbsp;</th>
+            <th><span class="chead">Accès PA<small>Stay as you are</small></span></th>
+            <th><span class="chead">Active<small>Modernise</small></span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Connect to Sage's certified Plateforme Agréée</td><td><span class="yes">&check;</span></td><td class="col-2"><span class="yes">&check;</span></td></tr>
+          <tr><td>Receive supplier e-invoices</td><td><span class="yes">&check;</span></td><td class="col-2"><span class="yes">&check;</span></td></tr>
+          <tr><td>Send compliant sales invoices</td><td><span class="yes">&check;</span></td><td class="col-2"><span class="yes">&check;</span></td></tr>
+          <tr><td>Keep your current tools, nothing changes</td><td><span class="yes">&check;</span></td><td class="col-2"><span class="no">&ndash;</span></td></tr>
+          <tr><td>Create and manage quotes &amp; invoices in-app</td><td><span class="no">&ndash;</span></td><td class="col-2"><span class="yes">&check;</span></td></tr>
+          <tr><td>Cash flow, payment tracking &amp; payment links</td><td><span class="no">&ndash;</span></td><td class="col-2"><span class="yes">&check;</span></td></tr>
+          <tr><td>Bank reconciliation &amp; bookkeeping</td><td><span class="no">&ndash;</span></td><td class="col-2"><span class="yes">&check;</span></td></tr>
+          <tr><td>Built-in AI</td><td><span class="no">&ndash;</span></td><td class="col-2"><span class="yes">&check;</span></td></tr>
+          <tr><td>Live collaboration with your accountant</td><td><span class="no">&ndash;</span></td><td class="col-2"><span class="yes">&check;</span></td></tr>
+          <tr><td>Free invoices each month</td><td><span class="pill-val">25 / mo</span></td><td class="col-2"><span class="pill-val">5 / mo</span></td></tr>
+          <tr><td>Cost to start</td><td><span class="pill-val">&euro;0</span></td><td class="col-2"><span class="pill-val">&euro;0</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- MANDATE -->
+<section class="mandate" id="mandate">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="kicker">Why now</div>
+      <h2>The reform is on a fixed timeline</h2>
+      <p class="lead">France is moving every business to electronic invoicing in phases. One obligation applies to everyone - and it arrives in 2026. Acting early removes the risk of a last-minute scramble.</p>
+    </div>
+    <div class="timeline">
+      <div class="tnode live reveal">
+        <div class="tdate">Sept 2026 <span class="badge-all">All businesses</span></div>
+        <h3>Reception becomes mandatory</h3>
+        <p>Every business in France must be able to receive electronic invoices through a certified platform - whatever its size.</p>
+      </div>
+      <div class="tnode reveal">
+        <div class="tdate">Sept 2026</div>
+        <h3>Large &amp; mid-sized issue</h3>
+        <p>Large and intermediate-sized businesses must also issue their invoices electronically from this date.</p>
+      </div>
+      <div class="tnode reveal">
+        <div class="tdate">Sept 2027</div>
+        <h3>Smaller businesses issue</h3>
+        <p>Small and micro-businesses move to mandatory electronic issuing, completing the rollout.</p>
+      </div>
+    </div>
+    <p class="mandate-note">1 September 2026 is the planned application date, with a grace period that may run to December 2026. Dates follow the current reform timetable and DGFiP specifications, which remain subject to confirmation.</p>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section class="trust">
+  <div class="wrap">
+    <div class="trust-card reveal">
+      <div class="trust-text">
+        <h2>Certified for the reform. Trusted for 40 years.</h2>
+        <p>Both options run on Sage's own DGFiP-certified Plateforme Agréée, so the invoices you send and receive meet the requirements of the French reform from day one.</p>
+        <ul class="trust-points">
+          <li><span class="fi"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></span> A certified platform built and run by Sage - no third party in between</li>
+          <li><span class="fi"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></span> Four decades trusted by businesses and accountants across Europe</li>
+          <li><span class="fi"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></span> Modernising with Active? Your accountant can set you up and collaborate live</li>
+        </ul>
+      </div>
+      <div class="trust-visual">
+        <div class="cert">
+          <div class="seal"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></div>
+          <strong>Plateforme Agréée</strong>
+          <span>DGFiP-certified e-invoicing platform</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="section-head reveal" style="margin-bottom:30px">
+    <div class="kicker">Good to know</div>
+    <h2>Questions, answered</h2>
+  </div>
+
+  <div class="faq-item reveal">
+    <button class="faq-q">Is it really free? <span class="pm"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
+    <div class="faq-a"><div>Yes. Sage Accès PA starts free with 25 invoices a month through December 2026, and Sage Active starts free with 5 invoices a month for one user. Neither needs a card to begin - you only move to a paid plan if and when your volumes grow.</div></div>
+  </div>
+
+  <div class="faq-item reveal">
+    <button class="faq-q">Which option should I choose? <span class="pm"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
+    <div class="faq-a"><div>If your only goal is to meet the mandate without changing how you work, choose Accès PA. If you also want to create invoices, track cash flow, reconcile your bank and work with your accountant in one modern place, choose Active. Accès PA is the door; Active is the destination.</div></div>
+  </div>
+
+  <div class="faq-item reveal">
+    <button class="faq-q">Does Sage Accès PA replace my current software? <span class="pm"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
+    <div class="faq-a"><div>No. Accès PA is a compliance bridge, not a new system. It connects you to Sage's certified platform so you can receive supplier invoices and convert and send your own - while your existing invoicing and accounting tools stay exactly as they are. There's no software upgrade, no connector and no IT project.</div></div>
+  </div>
+
+  <div class="faq-item reveal">
+    <button class="faq-q">Can I start with Accès PA and move to Active later? <span class="pm"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
+    <div class="faq-a"><div>Yes. It's one campaign with two paths. Many businesses begin with compliance today and step up to the fuller Active workflow when they're ready to modernise - so you're never locked out of the next move.</div></div>
+  </div>
+
+  <div class="faq-item reveal">
+    <button class="faq-q">When should I get set up? <span class="pm"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
+    <div class="faq-a"><div>As early as you can. Reception becomes mandatory for every business in September 2026, and Sage Accès PA is available from June 2026 - so getting set up over the summer means you're ready well ahead of the deadline, with no rush.</div></div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<div class="wrap">
+  <div class="final reveal">
+    <div class="final-inner">
+      <h2>One campaign. Your choice of pace.</h2>
+      <p>Be compliant, or compliant and modern. Either way, you start free today.</p>
+      <a href="#options" class="btn">Start with Sage Freemium <span class="arrow">&rarr;</span></a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap foot-inner">
+    <div class="foot-brand">
+      <span class="wordmark">Sage</span>
+      <span style="color:var(--slate-2)">Sage Freemium &middot; France e-invoicing reform</span>
+    </div>
+    <div class="foot-legal">&copy; 2026 The Sage Group plc, or its licensors. Information reflects Sage's current product direction and the e-invoicing reform timetable, both subject to change.</div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.faq-q').forEach(q=>{
+    q.addEventListener('click',()=>{
+      const item=q.parentElement;
+      const open=item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+      if(!open) item.classList.add('open');
+    });
+  });
+  const io=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:.13});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
